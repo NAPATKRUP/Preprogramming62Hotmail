@@ -12,6 +12,8 @@
     "bootstrap-vue": "^2.0.0-rc.24",
     "core-js": "^2.6.5",
     "firebase": "^6.2.3",
+    "firebase-admin": "^8.2.0",
+    "firebase-tools": "^7.0.1",
     "vue": "^2.6.10"
   },
   "devDependencies": {
