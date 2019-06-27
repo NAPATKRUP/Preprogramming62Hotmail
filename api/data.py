@@ -23,21 +23,25 @@ roomList = df['Room']
 staff_id_list = df['ID']
 name = df['Name']
 stateList = df['State']
+imgLink = df['Image']
 
 
-for i in range(71):
+for i in range(len(name)):
 
     room = "room-"+roomList[i]
     staff_id = int(staff_id_list[i])
     nickname = name[i]
     state = stateList[i]
+    img = imgLink[i]
     payload = {
         "nickname": nickname,
         "state": state,
+        "image": img,
+        "mails": [0]
     }
     if payload:
          db.child(room).child(staff_id).set(payload)
          print(json.dumps(payload, indent=4), room, staff_id, i,)
+    else:
+        print("ERROR at", i)
 
-# data = {"name": "สวัสดี 'Morty' Smith"}
-# db.child("users").child("Morty").set(data)
