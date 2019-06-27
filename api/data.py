@@ -1,6 +1,10 @@
 """ Import Data To Firebase Using pyrebase4 """
 
 import pyrebase
+import json
+import pandas as pd
+from pandas import ExcelWriter
+from pandas import ExcelFile
 
 config = {
     "apiKey": "AIzaSyDX-79Q7RsqKRqQC3dQQRTv60DRLW7pucA",
@@ -14,22 +18,26 @@ db = firebase.database()
 
 ##################################################################
 
+df = pd.read_excel('name_list.xlsx', sheet_name='Sheet1')
+roomList = df['Room']
+staff_id_list = df['ID']
+name = df['Name']
+stateList = df['State']
 
-room = ["room-a", "room-b", "roomb-c", "room-c", "room-d", "room-e"]
 
-for current_room in room:
-    staff_id = place_holder
+for i in range(71):
+
+    room = "room-"+roomList[i]
+    staff_id = int(staff_id_list[i])
+    nickname = name[i]
+    state = stateList[i]
     payload = {
-        "nickname": "nickname",
-        "state": "TD",
-        "mails": []
+        "nickname": nickname,
+        "state": state,
     }
     if payload:
-        db.child(current_room).child(staff_id).set(payload)
+         db.child(room).child(staff_id).set(payload)
+         print(json.dumps(payload, indent=4), room, staff_id, i,)
 
-
-
-
-# data = {"name": "Mortimer 'Morty' Smith"}
+# data = {"name": "สวัสดี 'Morty' Smith"}
 # db.child("users").child("Morty").set(data)
-
