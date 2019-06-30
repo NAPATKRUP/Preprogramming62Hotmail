@@ -37,7 +37,7 @@ for i in range(len(name)):
         "nickname": nickname,
         "state": state,
         "image": img,
-        "mails": [0]
+        "mails": ["Sample Mails"]
     }
     if payload:
          db.child(room).child(staff_id).set(payload)
