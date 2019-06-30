@@ -1,6 +1,5 @@
 const functions = require('firebase-functions');
 const firebase = require("firebase-admin");
-const express  = require("express");
 
 firebaseConfig = {
     apiKey: "AIzaSyDX-79Q7RsqKRqQC3dQQRTv60DRLW7pucA",
@@ -13,7 +12,7 @@ firebaseConfig = {
 };
 
 firebase.initializeApp(firebaseConfig);
-var db = firebase.database();
+var database = firebase.database();
 
 // Create and Deploy Your First Cloud Functions
 // https://firebase.google.com/docs/functions/write-firebase-functions
@@ -26,7 +25,25 @@ exports.sendMail = functions.https.onRequest((request, response) => {
     room = request.body.room; // room-A, room-B, room-C, room-D, room-E
     id = request.body.id;
     comment = request.body.comment;
-
-    console.log(room, id, comment)
-    response.send(room, id, comment)
+    payload = {
+        "room": room,
+        "id": id,
+        "comment": comment
+    };
+    var path = database.ref(room+"/"+id+"/mails");
+    try {
+        if (payload) {
+            path.on("value", (snapshot) => {
+                let mailArray = snapshot.val();
+                mailArray.push(comment)
+                path.set({
+                    mails: mailArray
+                })
+            }, (errorObject) => {
+                console.log("The read failed: " + errorObject.code);
+            });
+        }
+    } catch (e) {
+        response.send(e);
+    }
 });
