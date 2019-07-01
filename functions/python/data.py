@@ -25,13 +25,26 @@ name = df['Name']
 stateList = df['State']
 imgLink = df['Image']
 
+ta_a = ""
+ta_b = ""
+ta_c = ""
+ta_d = ""
+ta_e = ""
+ta_f = ""
+
+td_a = ""
+td_b = ""
+td_c = ""
+td_d = ""
+td_e = ""
+td_f = ""
 
 for i in range(len(name)):
 
-    room = "room-"+roomList[i]
+    room = "room"+roomList[i]
     staff_id = int(staff_id_list[i])
     nickname = name[i]
-    state = stateList[i]
+    state = stateList[i].lower()
     img = imgLink[i]
     payload = {
         "nickname": nickname,
@@ -39,9 +52,35 @@ for i in range(len(name)):
         "image": img,
         "mails": ["Sample Mails"]
     }
+
+    if state == "ta":
+        if room == "roomA": ta_a += str(staff_id)+" "
+        if room == "roomB": ta_b += str(staff_id)+" "
+        if room == "roomC": ta_c += str(staff_id)+" "
+        if room == "roomD": ta_d += str(staff_id)+" "
+        if room == "roomE": ta_e += str(staff_id)+" "
+    elif state == "td":
+        if room == "roomA": td_a += str(staff_id)+" "
+        if room == "roomB": td_b += str(staff_id)+" "
+        if room == "roomC": td_c += str(staff_id)+" "
+        if room == "roomD": td_d += str(staff_id)+" "
+        if room == "roomE": td_e += str(staff_id)+" "
+
+
     if payload:
-         db.child(room).child(staff_id).set(payload)
-         print(json.dumps(payload, indent=4), room, staff_id, i,)
+        db.child(room).child(staff_id).set(payload)
+        print(json.dumps(payload, indent=4), room, staff_id, i,)
     else:
         print("ERROR at", i)
 
+db.child("roomA").child("ta").set(ta_a)
+db.child("roomB").child("ta").set(ta_b)
+db.child("roomC").child("ta").set(ta_c)
+db.child("roomD").child("ta").set(ta_d)
+db.child("roomE").child("ta").set(ta_e)
+
+db.child("roomA").child("td").set(td_a)
+db.child("roomB").child("td").set(td_b)
+db.child("roomC").child("td").set(td_c)
+db.child("roomD").child("td").set(td_d)
+db.child("roomE").child("td").set(td_e)

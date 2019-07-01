@@ -31,21 +31,21 @@ exports.sendMail = functions.https.onRequest((request, response) => {
         "comment": comment
     };
     var path = database.ref(room+"/"+id+"/mails");
+    var setPath = database.ref(room+"/"+id);
     try {
         if (payload) {
             path.on("value", (snapshot) => {
-                let mailArray = snapshot.val();
-                mailArray.push(comment)
-                path.set({
-                    mails: mailArray
-                })
+                var mailArray = snapshot.val();
+                mailArray.push(comment);
+                path.update(mailArray)
             }, (errorObject) => {
                 console.log("The read failed: " + errorObject.code);
             });
         }
     } catch (e) {
-        response.send(e);
+        response.send(e)
     }
+
 });
 
 exports.getMail = functions.https.onRequest((request, response) => {
