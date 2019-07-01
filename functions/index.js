@@ -47,3 +47,17 @@ exports.sendMail = functions.https.onRequest((request, response) => {
         response.send(e);
     }
 });
+
+exports.getMail = functions.https.onRequest((request, response) => {
+    room = request.body.room;
+    id = request.body.id;
+    var path = database.ref(room+"/"+id+"/mails");
+
+    try {
+        path.on("value", (snapshot) => {
+            response.send(snapshot.val())
+        })
+    } catch (e) {
+        response.send(e);
+    }
+});
