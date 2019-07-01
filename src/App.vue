@@ -4,78 +4,79 @@
       <!-- Home -->
       <br><br><br>
       <div v-if="page == 0">
-        <h1 class="titlepage">Preprogramming62 | Hotmail</h1>
+        <h1 class="mytitle">Prepro62 Hotmail</h1>
         <br>
         <div class="row m-3">
-          <button @click="change(1)" class="btn btn-secondary btn-lg col-12 col-md-4 p-5 m-2"><h1>Room A</h1></button>
-          <button @click="change(2)" class="btn btn-success btn-lg col-12 col-md-4 p-5 m-2"><h1>Room B</h1></button>
-          <button @click="change(3)" class="btn btn-danger btn-lg col-12 col-md-4 p-5 m-2"><h1>Room C</h1></button>
+          <button @click="change(1)" class="btn btn-warning btn-lg col-12 col-md-4 p-5 m-2"><h1>Room A</h1></button>
+          <button @click="change(2)" class="btn btn-warning btn-lg col-12 col-md-4 p-5 m-2"><h1>Room B</h1></button>
+          <button @click="change(3)" class="btn btn-warning btn-lg col-12 col-md-4 p-5 m-2"><h1>Room C</h1></button>
           <button @click="change(4)" class="btn btn-warning btn-lg col-12 col-md-4 p-5 m-2"><h1>Room D</h1></button>
-          <button @click="change(5)" class="btn btn-info btn-lg col-12 col-md-4 p-5 m-2"><h1>Room E</h1></button>
+          <button @click="change(5)" class="btn btn-warning btn-lg col-12 col-md-4 p-5 m-2"><h1>Room E</h1></button>
         </div>
       </div>
+
       <!-- Room A -->
       <div v-if="page == 1">
-        <h1 class="titlepage myrooma">Room A</h1><br><br>
+        <h1 class="myroom">Room A</h1><br><br>
         <h3>TD | Teaching Director</h3><br>
         <div class="row m-3">
-          <data-card v-for="i in user_td_a" :select="i" v-bind:key="i"/>
+          <data-card v-for="i in user_td_a" :select="i" myclass="roomA" v-bind:key="i"/>
         </div><br>
         <h3>TA | Teaching Assistant</h3><br>
         <div class="row m-3">
-          <data-card v-for="i in user_ta_a" :select="i" v-bind:key="i"/>
+          <data-card v-for="i in user_ta_a" :select="i" myclass="roomA" v-bind:key="i"/>
         </div>
       </div>
 
       <!-- Room B -->
       <div v-if="page == 2">
-        <h1 class="titlepage myroomb">Room B</h1><br><br>
+        <h1 class="myroom">Room B</h1><br><br>
         <h3>TD | Teaching Director</h3><br>
         <div class="row m-3">
-          <data-card v-for="i in user_td_b" :select="i" v-bind:key="i"/>
+          <data-card v-for="i in user_td_b" :select="i" myclass="roomB" v-bind:key="i"/>
         </div><br>
         <h3>TA | Teaching Assistant</h3><br>
         <div class="row m-3">
-          <data-card v-for="i in user_ta_b" :select="i" v-bind:key="i"/>
+          <data-card v-for="i in user_ta_b" :select="i" myclass="roomB" v-bind:key="i"/>
         </div>
       </div>
 
       <!-- Room C -->
       <div v-if="page == 3">
-        <h1 class="titlepage myroomc">Room C</h1><br>
+        <h1 class="myroom">Room C</h1><br>
         <h3>TD | Teaching Director</h3><br>
         <div class="row m-3">
-          <data-card v-for="i in user_td_c" :select="i" v-bind:key="i"/>
+          <data-card v-for="i in user_td_c" :select="i" myclass="roomC" v-bind:key="i"/>
         </div><br>
         <h3>TA | Teaching Assistant</h3><br>
         <div class="row m-3">
-          <data-card v-for="i in user_ta_c" :select="i" v-bind:key="i"/>
+          <data-card v-for="i in user_ta_c" :select="i" myclass="roomC" v-bind:key="i"/>
         </div>
       </div>
 
       <!-- Room D -->
       <div v-if="page == 4">
-        <h1 class="titlepage myroomd">Room D</h1><br>
+        <h1 class="myroom">Room D</h1><br>
         <h3>TD | Teaching Director</h3><br>
         <div class="row m-3">
-          <data-card v-for="i in user_td_d" :select="i" v-bind:key="i"/>
+          <data-card v-for="i in user_td_d" :select="i" myclass="roomD" v-bind:key="i"/>
         </div><br>
         <h3>TA | Teaching Assistant</h3><br>
         <div class="row m-3">
-          <data-card v-for="i in user_ta_d" :select="i" v-bind:key="i"/>
+          <data-card v-for="i in user_ta_d" :select="i" myclass="roomD" v-bind:key="i"/>
         </div>
       </div>
 
       <!-- Room E -->
       <div v-if="page == 5">
-        <h1 class="titlepage myroome">Room E</h1><br>
+        <h1 class="myroom">Room E</h1><br>
         <h3>TD | Teaching Director</h3><br>
         <div class="row m-3">
-          <data-card v-for="i in user_td_e" :select="i" v-bind:key="i"/>
+          <data-card v-for="i in user_td_e" :select="i" myclass="roomE" v-bind:key="i"/>
         </div><br>
         <h3>TA | Teaching Assistant</h3><br>
         <div class="row m-3">
-          <data-card v-for="i in user_ta_e" :select="i" v-bind:key="i"/>
+          <data-card v-for="i in user_ta_e" :select="i" myclass="roomE" v-bind:key="i"/>
         </div>
       </div>
 
@@ -83,7 +84,7 @@
       <div v-if="page != 0">
         <button class="gohome" @click="page = 0"><img src="./assets/home.png" width="60px" height="60px"/></button>
       </div>
-      <br><br><br>
+      <br><br>
     </div>
   </div>
 </template>
@@ -122,55 +123,45 @@ export default {
     let self = this
     data.on('value', function(snapshot) {
         self.value = snapshot.val()
-        self.user_td_a = self.value.classroom.rooma.td.split(' ')
-        self.user_ta_a = self.value.classroom.rooma.ta.split(' ')
+        self.user_td_a = self.value.roomA.td.split(' ')
+        self.user_ta_a = self.value.roomA.ta.split(' ')
 
-        self.user_td_b = self.value.classroom.roomb.td.split(' ')
-        self.user_ta_b = self.value.classroom.roomb.ta.split(' ')
+        self.user_td_b = self.value.roomB.td.split(' ')
+        self.user_ta_b = self.value.roomB.ta.split(' ')
 
-        self.user_td_c = self.value.classroom.roomc.td.split(' ')
-        self.user_ta_c = self.value.classroom.roomc.ta.split(' ')
+        self.user_td_c = self.value.roomC.td.split(' ')
+        self.user_ta_c = self.value.roomC.ta.split(' ')
 
-        self.user_td_d = self.value.classroom.roomd.td.split(' ')
-        self.user_ta_d = self.value.classroom.roomd.ta.split(' ')
+        self.user_td_d = self.value.roomD.td.split(' ')
+        self.user_ta_d = self.value.roomD.ta.split(' ')
 
-        self.user_td_e = self.value.classroom.roome.td.split(' ')
-        self.user_ta_e = self.value.classroom.roome.ta.split(' ')
+        self.user_td_e = self.value.roomE.td.split(' ')
+        self.user_ta_e = self.value.roomE.ta.split(' ')
     })
   }
 }
 </script>
 
 <style lang="scss">
+* {
+  color: white;
+}
 #app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  font-family: 'Russo One', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  background: white;
+  background: #002D40;
   background-size: cover;
   margin: 0;
   min-height: 100vh;
 }
-.myrooma {
-  background:#6c757d;
-  color: white;
+.mytitle {
+  font-size: 50px;
 }
-.myroomb {
-  background:#28a745;
-  color: white;
-}
-.myroomc {
-  background:#dc3545;
-  color: white;
-}
-.myroomd {
-  background:#ffc107;
-  color: white;
-}
-.myroome {
-  background:#17a2b8;
-  color: white;
+.myroom{
+  background:#D9ECF2;
+  color: black;
 }
 .gohome {
   position: fixed;
