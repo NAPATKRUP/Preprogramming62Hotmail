@@ -1,6 +1,6 @@
 <template>
   <div class="col-12 col-md-3 mycard">
-    <h3 class="m-2">{{ value.name }}</h3>
+    <h3 class="m-2 myname">พี่{{ value.nickname }}</h3>
     <img class="w-100 my-1" :src="value.image">
     <b-button v-b-modal.modal-1 @click="opencomment()" class="tocomment my-1">Comment</b-button>
     <button class="showcomment m-1"><img src="../assets/find.png" width="30px" height="30px"/></button>
@@ -26,21 +26,21 @@ Vue.use(BootstrapVue)
 
 export default {
   name: 'DataCard',
-  props: ['select'],
+  props: ['select', 'myclass'],
   data () {
     return {
       value: null,
-      statuscomment: 0,
       name: "",
       comment: "",
     }
   },
 
   mounted () {
-    let data = database().ref(this.select)
+    let data = database().ref(this.myclass.select)
     let self = this
     data.on('value', function(snapshot) {
         self.value = snapshot.val()
+        //console.log(this.value)
     })
   },
   methods: {
@@ -49,8 +49,7 @@ export default {
       this.$refs[self.select].show()
     },
     pushcomment() {
-      console.log(this.name, this.comment)
-      database().ref(this.value.comment).update([this.name, this.comment])
+      //console.log(this.name, this.comment)
     },
   }
 }
@@ -58,17 +57,22 @@ export default {
 
 <style lang="scss" scoped>
 .mycard {
-    display: inline;
-    background: rgb(209, 209, 209);
-    width: 50%;
-    border: 5px solid black;
-    border-radius: 5%;
-    margin: 3px;
-    padding: 5px;
+  font-family: 'Pridi', serif;
+  display: inline;
+  background: rgb(209, 209, 209);
+  width: 50%;
+  border: 5px solid black;
+  border-radius: 5%;
+  margin: 3px;
+  padding: 5px;
+}
+.myname {
+  color: black;
 }
 .tocomment {
+  font-family: 'Russo One', sans-serif;
   width: 100%;
-  background: black;
+  background: #F56A79;
   color: white;
   border: 2px solid black;
   border-radius: 5px;
