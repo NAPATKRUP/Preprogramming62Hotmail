@@ -61,3 +61,16 @@ exports.getMail = functions.https.onRequest((request, response) => {
         response.send(e);
     }
 });
+
+exports.getStaff = functions.https.onRequest((request, response) => {
+    room = request.body.room;
+    id = request.body.id;
+    var path = database.ref(room+"/"+id);
+    try {
+        path.on("value", (snapshot) => {
+            response.send(snapshot.val())
+        })
+    } catch (e) {
+        response.send(e)
+    }
+});
