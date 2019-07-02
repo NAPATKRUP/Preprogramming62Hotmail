@@ -6,7 +6,7 @@
       <div v-if="page == 0">
         <h1 class="mytitle">Prepro62 Hotmail</h1>
         <br>
-        <div class="row m-3">
+        <div class="row m-3 justify-content-center">
           <button @click="change(1)" class="btn btn-warning btn-lg col-12 col-md-4 p-5 m-2"><h1>Room A</h1></button>
           <button @click="change(2)" class="btn btn-warning btn-lg col-12 col-md-4 p-5 m-2"><h1>Room B</h1></button>
           <button @click="change(3)" class="btn btn-warning btn-lg col-12 col-md-4 p-5 m-2"><h1>Room C</h1></button>
@@ -105,7 +105,6 @@ export default {
   data() {
     return {
       page: 0,
-      value: null,
       user_td_a: null,
       user_ta_a: null,
       user_td_b: null,
@@ -119,31 +118,63 @@ export default {
     }
   },
   mounted () {
-    let data = database().ref(this.select)
     let self = this
-    data.on('value', function(snapshot) {
-        self.value = snapshot.val()
-        self.user_td_a = self.value.roomA.td.split(' ')
-        self.user_ta_a = self.value.roomA.ta.split(' ')
 
-        self.user_td_b = self.value.roomB.td.split(' ')
-        self.user_ta_b = self.value.roomB.ta.split(' ')
+    // A
+    let td_a = database().ref("roomA/td")
+    let ta_a = database().ref("roomA/ta")
+    td_a.on('value', function(snapshot) {
+        self.user_td_a = snapshot.val().split(' ')
+    })
+    ta_a.on('value', function(snapshot) {
+        self.user_ta_a = snapshot.val().split(' ')
+    })
 
-        self.user_td_c = self.value.roomC.td.split(' ')
-        self.user_ta_c = self.value.roomC.ta.split(' ')
+    // B
+    let td_b = database().ref("roomB/td")
+    let ta_b = database().ref("roomB/ta")
+    td_b.on('value', function(snapshot) {
+        self.user_td_b = snapshot.val().split(' ')
+    })
+    ta_b.on('value', function(snapshot) {
+        self.user_ta_b = snapshot.val().split(' ')
+    })
 
-        self.user_td_d = self.value.roomD.td.split(' ')
-        self.user_ta_d = self.value.roomD.ta.split(' ')
+    // C
+    let td_c = database().ref("roomC/td")
+    let ta_c = database().ref("roomC/ta")
+    td_c.on('value', function(snapshot) {
+        self.user_td_c = snapshot.val().split(' ')
+    })
+    ta_c.on('value', function(snapshot) {
+        self.user_ta_c = snapshot.val().split(' ')
+    })
 
-        self.user_td_e = self.value.roomE.td.split(' ')
-        self.user_ta_e = self.value.roomE.ta.split(' ')
+    // D
+    let td_d = database().ref("roomD/td")
+    let ta_d = database().ref("roomD/ta")
+    td_d.on('value', function(snapshot) {
+        self.user_td_d = snapshot.val().split(' ')
+    })
+    ta_d.on('value', function(snapshot) {
+        self.user_ta_d = snapshot.val().split(' ')
+    })
+
+    // E
+    let td_e = database().ref("roomE/td")
+    let ta_e = database().ref("roomE/ta")
+    td_e.on('value', function(snapshot) {
+        self.user_td_e = snapshot.val().split(' ')
+    })
+    ta_e.on('value', function(snapshot) {
+        self.user_ta_e = snapshot.val().split(' ')
     })
   }
 }
 </script>
 
 <style lang="scss">
-* {
+h1, h3 {
   color: white;
 }
 #app {

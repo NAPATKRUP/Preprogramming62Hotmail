@@ -1,19 +1,21 @@
 <template>
   <div class="col-12 col-md-3 mycard">
-    <h3 class="m-2 myname">พี่{{ value.nickname }}</h3>
-    <img class="w-100 my-1" :src="value.image">
-    <b-button v-b-modal.modal-1 @click="opencomment()" class="tocomment my-1">Comment</b-button>
-    <button class="showcomment m-1"><img src="../assets/find.png" width="30px" height="30px"/></button>
+    <div class="idcard">
+      <h3 class="myname">พี่{{ value.nickname }}</h3>
+      <img class="w-100 my-1" :src="value.image">
+      <b-button v-b-modal.modal-1 @click="opencomment()" class="tocomment my-1">Comment</b-button>
+      <button class="showcomment m-1"><img src="../assets/find.png" width="30px" height="30px"/></button>
 
-    <b-modal :id="modal-1" title="Send comment" :ref="select" @ok="pushcomment">
-      <p class="my-4">To {{ value.name }}</p>
-      <div class="form-group shadow-textarea">
-        <label>From</label>
-        <textarea class="form-control z-depth-1" rows="1" placeholder="Your name..." v-model="name"> </textarea><br>
-        <label>Comment</label>
-        <textarea class="form-control z-depth-1" rows="3" placeholder="Write something here..." v-model="comment"></textarea>
-      </div>
-    </b-modal>
+      <b-modal :id="modal-1" class="blacktext" title="Send comment" :ref="select" @ok="pushcomment">
+        <p class="my-4">To พี่{{ value.nickname }}</p>
+        <div class="form-group shadow-textarea">
+          <label>From</label>
+          <textarea class="form-control z-depth-1" rows="1" placeholder="Your name..." v-model="name"> </textarea><br>
+          <label>Comment</label>
+          <textarea class="form-control z-depth-1" rows="3" placeholder="Write something here..." v-model="comment"></textarea>
+        </div>
+      </b-modal>
+    </div>
   </div>
 </template>
 
@@ -36,13 +38,13 @@ export default {
   },
 
   mounted () {
-    let data = database().ref(this.myclass.select)
+    let data = database().ref(this.myclass + "/" + this.select)
     let self = this
     data.on('value', function(snapshot) {
         self.value = snapshot.val()
-        //console.log(this.value)
     })
   },
+
   methods: {
     opencomment() {
       var self = this
@@ -58,13 +60,13 @@ export default {
 <style lang="scss" scoped>
 .mycard {
   font-family: 'Pridi', serif;
-  display: inline;
+  margin: 1em 0;
+}
+.idcard {
+  padding: 10px;
   background: rgb(209, 209, 209);
-  width: 50%;
   border: 5px solid black;
   border-radius: 5%;
-  margin: 3px;
-  padding: 5px;
 }
 .myname {
   color: black;
@@ -83,5 +85,8 @@ export default {
 }
 .showcomment:hover {
   opacity: 0.7;
+}
+.activityCard {
+  padding: 1em;
 }
 </style>
