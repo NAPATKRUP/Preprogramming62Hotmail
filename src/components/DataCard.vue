@@ -3,16 +3,16 @@
     <div class="idcard">
       <h3 class="myname">พี่{{ showname }}</h3>
       <img class="w-100 my-1" :src="showimage">
-      <b-button v-b-modal.modal-1 @click="opencomment()" class="tocomment my-1">Comment</b-button>
-      <button class="showcomment m-1"><img src="../assets/find.png" width="30px" height="30px"/></button>
+      <b-button v-b-modal.modal-1 @click="openmail()" class="tomail my-1">Send Mail</b-button>
+      <button class="showmail m-1"><img src="../assets/find.png" width="30px" height="30px"/></button>
 
-      <b-modal :id="modal-1" class="blacktext" title="Send comment" :ref="select" @ok="pushcomment">
+      <b-modal :id="modal-1" title="Send mail" :ref="select" @ok="pushmail">
         <p class="my-4">To พี่{{ showname }}</p>
         <div class="form-group shadow-textarea">
-          <label>From</label>
+          <label>Form</label>
           <textarea class="form-control z-depth-1" rows="1" placeholder="Your name..." v-model="name"> </textarea><br>
           <label>Comment</label>
-          <textarea class="form-control z-depth-1" rows="3" placeholder="Write something here..." v-model="comment"></textarea>
+          <textarea class="form-control z-depth-1" rows="3" placeholder="Write something here..." v-model="mail"></textarea>
         </div>
       </b-modal>
     </div>
@@ -35,7 +35,7 @@ export default {
       showname: null,
       showimage: null,
       name: "",
-      comment: "",
+      mail: "",
     }
   },
 
@@ -50,12 +50,18 @@ export default {
   },
 
   methods: {
-    opencomment() {
+    openmail() {
       var self = this
       this.$refs[self.select].show()
     },
-    pushcomment() {
-      database().ref(this.myclass + "/" + this.select + "/mails").push(this.name + "||" + this.comment)
+    pushmail() {
+      if(this.name != "" && this.mail != "") {
+        database().ref(this.myclass + "/" + this.select + "/mails").push(this.name + "-||-" + this.mail)
+        alert("Mails has been send")
+      }
+      else {
+        alert("Please check your name and comment to try again")
+      }
     },
   }
 }
@@ -75,7 +81,7 @@ export default {
 .myname {
   color: black;
 }
-.tocomment {
+.tomail {
   font-family: 'Russo One', sans-serif;
   width: 100%;
   background: #F56A79;
@@ -83,11 +89,11 @@ export default {
   border: 2px solid black;
   border-radius: 5px;
 }
-.showcomment {
+.showmail {
   background: none;
   border: none;
 }
-.showcomment:hover {
+.showmail:hover {
   opacity: 0.7;
 }
 </style>
