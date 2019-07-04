@@ -12,6 +12,7 @@
           <button @click="change(3)" class="btn btn-warning btn-lg col-12 col-md-4 p-5 m-2"><h1>Room C</h1></button>
           <button @click="change(4)" class="btn btn-warning btn-lg col-12 col-md-4 p-5 m-2"><h1>Room D</h1></button>
           <button @click="change(5)" class="btn btn-warning btn-lg col-12 col-md-4 p-5 m-2"><h1>Room E</h1></button>
+          <button @click="change(6)" class="btn btn-warning btn-lg col-12 col-md-4 p-5 m-2"><h1>Head/Staff</h1></button>
         </div>
       </div>
 
@@ -80,6 +81,19 @@
         </div>
       </div>
 
+      <!-- Head -->
+      <div v-if="page == 6">
+        <h1 class="myroom">Head/staff</h1><br>
+        <h3>Head</h3><br>
+        <div class="row m-3">
+          <data-card v-for="i in user_head" :select="i" myclass="head_staff" v-bind:key="i"/>
+        </div>
+        <h3>Staff</h3><br>
+        <div class="row m-3">
+          <data-card v-for="i in user_staff" :select="i" myclass="head_staff" v-bind:key="i"/>
+        </div>
+      </div>
+
       <!-- button home and up -->
       <div v-if="page != 0">
         <button class="gohome" @click="page = 0"><img src="./assets/home.png" width="60px" height="60px"/></button>
@@ -114,7 +128,9 @@ export default {
       user_td_d: null,
       user_ta_d: null,
       user_td_e: null,
-      user_ta_e: null
+      user_ta_e: null,
+      user_head: null,
+      user_staff: null
     }
   },
   mounted () {
@@ -168,6 +184,18 @@ export default {
     })
     ta_e.on('value', function(snapshot) {
         self.user_ta_e = snapshot.val().split(' ')
+    })
+
+    // Head
+    let head_id = database().ref("head_staff/id_head")
+    head_id.on('value', function(snapshot) {
+        self.user_head = snapshot.val().split(' ')
+    })
+
+    // Staff
+    let staff_id = database().ref("head_staff/id_staff")
+    staff_id.on('value', function(snapshot) {
+        self.user_staff = snapshot.val().split(' ')
     })
   }
 }
